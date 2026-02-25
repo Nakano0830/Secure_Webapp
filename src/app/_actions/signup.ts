@@ -39,11 +39,15 @@ export const signupServerAction = async (
     // const hashedPassword = payload.password;
     const hashedPassword = await bcrypt.hash(payload.password, 10);
 
+    // ★ 追加: 秘密の合言葉のハッシュ化
+    const hashedSecretPhrase = await bcrypt.hash(payload.secretPhrase, 10);
+
     // ユーザの作成
     const user = await prisma.user.create({
       data: {
         email: payload.email,
         password: hashedPassword,
+        secretPhrase: hashedSecretPhrase, // 追加したフィールド
         name: payload.name,
       },
     });

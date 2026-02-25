@@ -18,6 +18,11 @@ const links = [
     label: "公開プロフィールの確認・編集",
     info: "ログインが必要なコンテンツ",
   },
+  {
+    href: "/delete",
+    label: "削除",
+    info: "アカウントを完全に削除（退会）",
+  },
 ];
 
 const Page: React.FC = () => {
