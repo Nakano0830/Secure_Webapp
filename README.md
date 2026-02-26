@@ -21,12 +21,9 @@
 ![sign](./images/signup.png)<br>
 
 主な変更点  
-app/_types/CommonSchems.ts  
-33行～44行  
-if文を用いた条件ごとに加算式でのスコア評価  
-ラベルなどの設定  
-app/signup/page.tsx  
-146行～163行  
+app/_types/CommonSchems.ts 33行～44行  
+if文を用いた条件ごとに加算式でのスコア評価 ラベルなどの設定  
+app/signup/page.tsx 146行～163行  
 前述した評価を基にしたラベルの適用  
 
 ### 2. IPアドレスベースのログイン試行制限・アカウントロック (Login)
