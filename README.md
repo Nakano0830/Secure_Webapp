@@ -57,7 +57,8 @@ IPアドレスの取得 ロックの設定 回数の確認
 * **ボタン制御:** 全ての条件を満たすまで、削除ボタンは非活性（disabled）状態を維持。
 <br>
 
-![Del_SecPh](./images/delte_ac01.png) <br>
+![Del_SecPh](./images/delte_ac01.png) 
+<br><br>
 ![Del_SecPh2](./images/delte_ac02.png)
 
 主な変更点  
