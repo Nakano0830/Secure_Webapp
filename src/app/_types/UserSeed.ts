@@ -13,7 +13,7 @@ export const userSeedSchema = z.object({
   name: userNameSchema,
   email: emailSchema,
   password: passwordSchema,
-  secretPhrase: secretPhraseSchema,
+  secretPhrase: secretPhraseSchema, // 追加: ユーザシードの秘密の合言葉のバリデーション
   role: roleSchema,
   aboutSlug: aboutSlugSchema.optional(),
   aboutContent: aboutContentSchema.optional(),

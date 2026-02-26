@@ -13,11 +13,8 @@ export const signupServerAction = async (
   signupRequest: SignupRequest,
 ): Promise<ServerActionResponse<UserProfile | null>> => {
   try {
-    // 入力検証
-    // 💀 現状では日本語のPWも受入れてしまう -> SignupRequest のバリデーション見直し
     const payload = signupRequestSchema.parse(signupRequest);
 
-    // 💡スパム登録対策（1秒遅延）
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // 既に登録済みユーザのサインアップではないか確認
@@ -25,8 +22,6 @@ export const signupServerAction = async (
       where: { email: payload.email },
     });
     if (existingUser) {
-      // 💀 このアカウントがシステムに存在することを知らせてしまうことになる。
-      // 認証メールを送信するなどの方法が望ましい
       return {
         success: false,
         payload: null,
@@ -34,12 +29,9 @@ export const signupServerAction = async (
       };
     }
 
-    // パスワードのハッシュ化
-    // 💀 ハッシュ化せずにPW保存（ダメ絶対）
-    // const hashedPassword = payload.password;
     const hashedPassword = await bcrypt.hash(payload.password, 10);
 
-    // ★ 追加: 秘密の合言葉のハッシュ化
+    // 追加: 秘密の合言葉のハッシュ化
     const hashedSecretPhrase = await bcrypt.hash(payload.secretPhrase, 10);
 
     // ユーザの作成
@@ -53,7 +45,6 @@ export const signupServerAction = async (
     });
 
     // レスポンスの生成
-    // 💀 パスワードは無論、不要な情報はレスポンスしない。
     const res: ServerActionResponse<UserProfile> = {
       success: true,
       payload: userProfileSchema.parse(user), // 余分なプロパティを削除,
@@ -67,9 +58,6 @@ export const signupServerAction = async (
       success: false,
       payload: null,
       message: errorMsg,
-      // 💀 エラーメッセージはユーザに見せない方が良い
-      // システム内部構造や依存関係をユーザに漏らす可能性がある
-      // message: "サインアップのサーバサイドの処理に失敗しました。",
     };
   }
 };

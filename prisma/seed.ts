@@ -79,7 +79,7 @@ async function main() {
     id: uuid(),
     name: userSeed.name,
     password: await bcrypt.hash(userSeed.password, 10),
-    secretPhrase: await bcrypt.hash(userSeed.secretPhrase, 10), // ダミーの秘密の合言葉をハッシュ化して保存
+    secretPhrase: await bcrypt.hash(userSeed.secretPhrase, 10), // 秘密の合言葉をハッシュ化して保存
     role: userSeed.role,
     email: userSeed.email,
     aboutSlug: userSeed.aboutSlug || null,

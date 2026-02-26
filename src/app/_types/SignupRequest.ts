@@ -10,7 +10,7 @@ export const signupRequestSchema = z.object({
   name: userNameSchema,
   email: emailSchema,
   password: passwordSchema,
-  secretPhrase: secretPhraseSchema,
+  secretPhrase: secretPhraseSchema, // 追加: サインアップ時の秘密の合言葉のバリデーション
 });
 
 export type SignupRequest = z.infer<typeof signupRequestSchema>;

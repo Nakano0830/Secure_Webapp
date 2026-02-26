@@ -32,7 +32,7 @@ export const aboutSlugSchema = z
 
 export const getPasswordStrength = (password: string) => {
   if (!password) return 0;
-  let score = 0;
+  let score = 0; // 加算用
   if (password.length >= 8) score++; // 長さ
   if (/[A-Z]/.test(password)) score++; // 大文字
   if (/[0-9]/.test(password)) score++; // 数字

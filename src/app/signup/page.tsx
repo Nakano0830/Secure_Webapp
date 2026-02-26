@@ -143,7 +143,7 @@ const Page: React.FC = () => {
             autoComplete="off"
           />
 
-          {/* ★ 追加: パスワード強度インジケーター */}
+          {/*  追加: パスワード強度インジケーター */}
           {passwordValue && (
             <div className="mt-2">
               <div className="flex gap-1 h-1.5">
@@ -166,7 +166,7 @@ const Page: React.FC = () => {
           <ErrorMsgField msg={fieldErrors.root?.message} />
         </div>
 
-        {/* ★追加: 秘密の合言葉入力 */}
+        {/* 追加: 秘密の合言葉入力 */}
         <div>
           <label htmlFor={c_SecretPhrase} className="mb-2 block font-bold">
             秘密の合言葉 <span className="text-xs text-gray-500 font-normal">（アカウント削除時に必要です）</span>
@@ -175,7 +175,7 @@ const Page: React.FC = () => {
             {...formMethods.register(c_SecretPhrase)}
             id={c_SecretPhrase}
             placeholder="合言葉を入力"
-            type="password" // 推測されにくいようにパスワード形式が推奨です
+            type="password" 
             disabled={isPending || isSignUpCompleted}
             error={!!fieldErrors.secretPhrase}
             autoComplete="off"

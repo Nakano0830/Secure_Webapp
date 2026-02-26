@@ -79,7 +79,6 @@ export const POST = async (req: NextRequest) => {
         create: { ip, attempts: 1 },
       });
 
-      // 💀 このアカウント（メールアドレス）の有効無効が分かってしまう。
       const res: ApiResponse<null> = {
         success: false,
         payload: null,
@@ -91,7 +90,6 @@ export const POST = async (req: NextRequest) => {
     // -----------------------------------------------------
     // 4. パスワードの検証 (元のまま)
     // -----------------------------------------------------
-    // ✍ bcrypt でハッシュ化したパスワードを検証ように書き換えよ。
     const isValidPassword = await bcrypt.compare(loginRequest.password, user.password);
     
     if (!isValidPassword) {
