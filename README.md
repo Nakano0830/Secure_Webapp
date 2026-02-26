@@ -3,10 +3,10 @@
 ## 概要
 　実習課題としてウェブアプリに認証・認可機能を追加しました。
 
-　追加した主な機能は以下の3点です。
-    ・連続N回のログイン失敗でアカウントロックする機能
-    ・サインアップのときにパスワード強度を表示するような機能
-    ・サインアップ時に秘密の合言葉を設定し、それを用いてアカウントを削除する機能
+　追加した主な機能は以下の3点です。  
+    ・連続N回のログイン失敗でアカウントロックする機能  
+    ・サインアップのときにパスワード強度を表示するような機能  
+    ・サインアップ時に秘密の合言葉を設定し、それを用いてアカウントを削除する機能  
 
 
 ## 主な実装機能 (Key Features)
@@ -18,16 +18,16 @@
 * **UI表示:** スコアに応じてプログレスバーの色が「赤 → 橙 → 黄 → 緑」と変化し、強度ラベル（「非常に弱い」〜「非常に強い」）を表示。
 <br>
 
-![sign](./Images/signup.png)<br>
+![sign](./images/signup.png)<br>
 
-主な変更点
-app/_types/CommonSchems.ts
-33行~44行
-if文を用いた条件ごとに加算式でのスコア評価
-ラベルなどの設定
-app/signup/page.tsx
-146行~163行
-前述した評価を基にしたラベルの適用
+主な変更点  
+app/_types/CommonSchems.ts  
+33行～44行  
+if文を用いた条件ごとに加算式でのスコア評価  
+ラベルなどの設定  
+app/signup/page.tsx  
+146行～163行  
+前述した評価を基にしたラベルの適用  
 
 ### 2. IPアドレスベースのログイン試行制限・アカウントロック (Login)
 パスワードスプレー攻撃やクレデンシャルスタッフィング（リスト型攻撃）を防ぐためのレートリミット機能です。
@@ -36,15 +36,13 @@ app/signup/page.tsx
 * **実装:** データベースに `LoginAttempt` テーブルを追加し、`x-forwarded-for` ヘッダーから取得したIPアドレスごとに失敗回数と最終試行日時を記録。成功時にリセット。
 <br>
 
-![logcount](./Images/login.png)<br>
+![logcount](./images/login.png)<br>
 
-主な変更点
-prisma/schema.prisma
-65行~69行
-テーブルの追加 IPアドレスと回数と日時
-app/api/login/route.ts
-22行~51行 75行~80行 98行~103行
-IPアドレスの取得 ロックの設定 回数の確認
+主な変更点  
+prisma/schema.prisma 65行～69行  
+テーブルの追加 IPアドレスと回数と日時  
+app/api/login/route.ts 22行～51行 75行～80行 98行～103行  
+IPアドレスの取得 ロックの設定 回数の確認  
 
 ### 3. 秘密の合言葉によるアカウント保護 (Signup & Delete)
 アカウントの不正削除を防ぐため、サインアップ時に「秘密の合言葉 (Secret Phrase)」を登録する仕組みを導入しました。
@@ -59,31 +57,23 @@ IPアドレスの取得 ロックの設定 回数の確認
 * **ボタン制御:** 全ての条件を満たすまで、削除ボタンは非活性（disabled）状態を維持。
 <br>
 
-![Del_SecPh](./Images/delte_ac01.png) <br>
-![Del_SecPh2](./Images/delte_ac02.png)
+![Del_SecPh](./images/delte_ac01.png) <br>
+![Del_SecPh2](./images/delte_ac02.png)
 
-主な変更点
-prisma/schema.prisma
-34行
-secretPhrase レコードの追加
-prisma/seed.ts
-82行目など
-secretPhraseをuserseedに追加
-app/_types/DeleteRequest.ts
-完全新規
-アカウントを削除するための.tsファイル
-app/_types/UserSeed.ts
-16行目など
-secretPhraseSchemaの適用
-app/_actions/signup.ts
-43行目など
-合言葉に対してのハッシュの適用
-app/singup/page.tsx
-169行~185行
-合言葉登録用のフォームの追加
-app/api/delete/route.ts
-完全新規
-パスワード・合言葉の検証 削除実行
-app/delete/page.tsx
-完全新規
-削除実行用のページの追加
+主な変更点  
+prisma/schema.prisma 34行  
+secretPhrase レコードの追加  
+prisma/seed.ts 82行目など  
+secretPhraseをuserseedに追加  
+app/_types/DeleteRequest.ts 完全新規  
+アカウントを削除するための.tsファイル  
+app/_types/UserSeed.ts 16行目など  
+secretPhraseSchemaの適用  
+app/_actions/signup.ts 43行目など  
+合言葉に対してのハッシュの適用  
+app/singup/page.tsx 169行～185行  
+合言葉登録用のフォームの追加  
+app/api/delete/route.ts 完全新規  
+パスワード・合言葉の検証 削除実行  
+app/delete/page.tsx 完全新規  
+削除実行用のページの追加  
